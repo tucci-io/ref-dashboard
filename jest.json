@@ -1,0 +1,18 @@
+{
+  "testEnvironment": "node",
+  "globals": {
+    "APP_CONFIG": ""
+  },
+  "moduleDirectories": [
+    "node_modules"
+  ],
+  "moduleNameMapper": {
+    "renderer": "<rootDir>/node_modules/react-test-renderer",
+    "react": "<rootDir>/node_modules/react/react.js",
+    "^react-dom": "<rootDir>/node_modules/react-dom",
+    "^react-router": "<rootDir>/node_modules/react-router",
+
+    "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/styleMock.js",
+    "^.+\\.(css|less|styl|sass)$": "<rootDir>/__mocks__/fileMock.js"
+  }
+}

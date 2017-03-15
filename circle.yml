@@ -1,0 +1,66 @@
+machine:
+  node:
+    version: 7
+  java:
+    version: oraclejdk8
+  environment:
+    YARN_VERSION: 0.17.10
+    PATH: "${PATH}:${HOME}/.yarn/bin"
+
+general:
+  artifacts:
+    - "coverage/"
+    - "reports/"
+
+dependencies:
+  pre:
+    - |
+      if [[ ! -e ~/.yarn/bin/yarn || $(yarn --version) != "${YARN_VERSION}" ]]; then
+        echo "Download and install Yarn."
+        curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
+      else
+        echo "The correct version of Yarn is already installed."
+      fi
+  override:
+    - yarn install
+  cache_directories:
+    - ~/.yarn
+    - ~/.yarn-cache
+  post:
+    - curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - sudo dpkg -i google-chrome.deb
+    - sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
+    - google-chrome --version
+    - rm google-chrome.deb
+
+test:
+  override:
+    - yarn e2e:
+        timeout: 400
+
+deployment:
+  production:
+    branch: syn4-master
+    commands:
+      - yarn git-config
+      - yarn deploy
+
+  staging:
+    branch: syn4-devel
+    commands:
+      - yarn deploy:staging
+
+  sockets:
+    branch: /.*/
+    commands:
+      - yarn deploy:staging
+
+experimental:
+  notify:
+    branches:
+      only:
+        - master
+        - devel
+        - sng
+        - syn4-master
+        - syn4-devel
