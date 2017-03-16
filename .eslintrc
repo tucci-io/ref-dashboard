@@ -1,0 +1,89 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": "airbnb",
+  "globals": {
+    "APP_CONFIG": true
+  },
+  "rules": {
+    "react/sort-comp": [2, {
+      "groups": {
+        "lifecycle": [
+          "displayName",
+          "propTypes",
+          "contextTypes",
+          "childContextTypes",
+          "mixins",
+          "statics",
+          "mixinsConfig",
+          "validatorConstraints",
+          "defaultProps",
+          "constructor",
+          "getDefaultProps",
+          "getInitialState",
+          "getChildContext",
+          "componentWillMount",
+          "componentDidMount",
+          "componentWillReceiveProps",
+          "shouldComponentUpdate",
+          "componentWillUpdate",
+          "componentDidUpdate",
+          "componentWillUnmount"
+        ],
+        "syncano": [
+          "/^get.+$/",
+          "/^on.+$/",
+          "/^is.+$/",
+          "/^has.+$/",
+          "/^handle.+$/"
+        ],
+        "rendering": [
+          "/^render.+$/",
+          "render"
+        ]
+      },
+      "order": [
+        "lifecycle",
+        "syncano",
+        "everything-else",
+        "rendering"
+      ]
+    }],
+    "newline-after-var": [2, "always"],
+    "camelcase": 1,
+    "comma-dangle": [2, "never"],
+    "global-require": 0,
+    "max-len": [2, 120],
+    "import/no-unresolved": [2, { ignore: ['\.assets$'] }],
+    "no-param-reassign": [2, { "props": false }],
+    "no-unused-expressions": [2, { "allowShortCircuit": true }],
+    "react/jsx-first-prop-new-line": [2, "multiline"],
+    "react/jsx-boolean-value": [2, "always"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "arrow-parens": ["error", "always", {
+      "requireForBlockBody": true
+    }],
+    "jsx-a11y/no-static-element-interactions": "off",
+    "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
+    "import/first": ["error", null],
+
+    // to be fixed
+    "react/forbid-prop-types": "off",
+    "no-prototype-builtins": [0],
+    "react/no-find-dom-node": [0],
+    "no-mixed-operators": [0],
+    "react/jsx-no-target-blank": [0],
+    "import/imports-first": [0],
+    "react/no-string-refs": [0],
+    "array-callback-return": [0],
+    "prefer-rest-params": [0],
+    "new-cap": [2, {"newIsCap": true, "capIsNew": false}],
+    "no-underscore-dangle": 0, // to be removed after formMixin is deleted
+    "react/prefer-es6-class": [0],
+    "react/prop-types": [0],
+  }
+}
